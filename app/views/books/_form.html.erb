@@ -1,10 +1,10 @@
-<%= form_with model:@book, local:true do |f| %>
+<%= form_with model: @book, local: true do |f| %>
   <% if @book.errors.any? %>
     <div>
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
       <ul>
-      <% book.errors.full_messages.each do |message| %>
+      <% @book.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -22,6 +22,10 @@
   </div>
 
   <div>
-    <%= f.submit %>
+    <% if @book.new_record? %>
+      <%= f.submit "Create Book" %>  <!-- 新規作成 -->
+    <% else %>
+      <%= f.submit "Update Book" %>  <!-- 更新 -->
+    <% end %>
   </div>
 <% end %>
